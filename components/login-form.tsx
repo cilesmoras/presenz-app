@@ -1,6 +1,6 @@
 "use client";
 
-import { login, loginWithGoogle } from "@/app/actions/auth";
+import { login } from "@/app/actions/auth";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,15 +9,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-} from "@/components/ui/field";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { useState } from "react";
 
 export function LoginForm({
@@ -41,15 +35,15 @@ export function LoginForm({
     }
   };
 
-  const handleGoogleLogin = async () => {
-    setError(null);
-    setIsLoading(true);
-    const result = await loginWithGoogle();
-    if (result?.error) {
-      setError(result.error);
-      setIsLoading(false);
-    }
-  };
+  // const handleGoogleLogin = async () => {
+  //   setError(null);
+  //   setIsLoading(true);
+  //   const result = await loginWithGoogle();
+  //   if (result?.error) {
+  //     setError(result.error);
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -82,12 +76,12 @@ export function LoginForm({
               <Field>
                 <div className="flex items-center">
                   <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <a
+                  {/* <a
                     href="#"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
                     Forgot your password?
-                  </a>
+                  </a> */}
                 </div>
                 <Input
                   id="password"
@@ -101,7 +95,7 @@ export function LoginForm({
                 <Button type="submit" disabled={isLoading}>
                   {isLoading ? "Logging in..." : "Login"}
                 </Button>
-                <Button
+                {/* <Button
                   variant="outline"
                   type="button"
                   onClick={handleGoogleLogin}
@@ -117,7 +111,7 @@ export function LoginForm({
                   >
                     Sign up
                   </Link>
-                </FieldDescription>
+                </FieldDescription> */}
               </Field>
             </FieldGroup>
           </form>

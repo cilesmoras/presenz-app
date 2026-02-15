@@ -1,0 +1,3 @@
+☐ create ug query file for departments and move the getDepartments function there
+☐ fetchDepartmentById function in the same file
+☐ refactor the datatable

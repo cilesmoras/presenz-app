@@ -6,8 +6,28 @@ import {
   DepartmentFormValues,
   departmentsFormSchema,
 } from "@/zod-schemas/departments.zod";
+import { isNull } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { validateAuth } from "./auth";
+
+export async function getDepartments() {
+  try {
+    await validateAuth();
+    const result = await db
+      .select({
+        id: departments.id,
+        name: departments.name,
+        createdAt: departments.createdAt,
+        createdBy: departments.createdBy,
+      })
+      .from(departments)
+      .where(isNull(departments.deletedAt));
+    return result;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
 
 export async function createDepartment(
   data: DepartmentFormValues,

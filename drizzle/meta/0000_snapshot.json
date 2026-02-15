@@ -1,5 +1,5 @@
 {
-  "id": "22c95eb4-e280-432d-8121-733ee6ac85b0",
+  "id": "cc67fd8a-1fba-4d59-b483-c39c0576d341",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -41,33 +41,6 @@
         "check_out_time": {
           "name": "check_out_time",
           "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "status": {
-          "name": "status",
-          "type": "attendance_status",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "is_tardy": {
-          "name": "is_tardy",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
-        },
-        "tardy_minutes": {
-          "name": "tardy_minutes",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "default": 0
-        },
-        "work_hours": {
-          "name": "work_hours",
-          "type": "numeric(5, 2)",
           "primaryKey": false,
           "notNull": false
         },
@@ -143,17 +116,11 @@
           "primaryKey": false,
           "notNull": true
         },
-        "description": {
-          "name": "description",
-          "type": "text",
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(36)",
           "primaryKey": false,
-          "notNull": false
-        },
-        "manager_id": {
-          "name": "manager_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -162,114 +129,33 @@
           "notNull": true,
           "default": "now()"
         },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "varchar(36)",
+          "primaryKey": false,
+          "notNull": false
+        },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
+          "notNull": false
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "deleted_by": {
+          "name": "deleted_by",
+          "type": "varchar(36)",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.employee_shifts": {
-      "name": "employee_shifts",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "employee_id": {
-          "name": "employee_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "shift_id": {
-          "name": "shift_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "day_of_week": {
-          "name": "day_of_week",
-          "type": "day_of_week",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "effective_from": {
-          "name": "effective_from",
-          "type": "date",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "effective_until": {
-          "name": "effective_until",
-          "type": "date",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "is_active": {
-          "name": "is_active",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "employee_shifts_employee_id_employees_id_fk": {
-          "name": "employee_shifts_employee_id_employees_id_fk",
-          "tableFrom": "employee_shifts",
-          "tableTo": "employees",
-          "columnsFrom": [
-            "employee_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "employee_shifts_shift_id_shifts_id_fk": {
-          "name": "employee_shifts_shift_id_shifts_id_fk",
-          "tableFrom": "employee_shifts",
-          "tableTo": "shifts",
-          "columnsFrom": [
-            "shift_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -286,11 +172,17 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
+        "department_id": {
+          "name": "department_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
+        },
+        "shift_id": {
+          "name": "shift_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         },
         "employee_code": {
           "name": "employee_code",
@@ -298,11 +190,11 @@
           "primaryKey": false,
           "notNull": true
         },
-        "department_id": {
-          "name": "department_id",
-          "type": "integer",
+        "name": {
+          "name": "name",
+          "type": "varchar(100)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "position": {
           "name": "position",
@@ -318,11 +210,9 @@
         },
         "status": {
           "name": "status",
-          "type": "employee_status",
-          "typeSchema": "public",
+          "type": "varchar(20)",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'active'"
+          "notNull": true
         },
         "phone_number": {
           "name": "phone_number",
@@ -353,25 +243,25 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "employees_user_id_users_id_fk": {
-          "name": "employees_user_id_users_id_fk",
-          "tableFrom": "employees",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
         "employees_department_id_departments_id_fk": {
           "name": "employees_department_id_departments_id_fk",
           "tableFrom": "employees",
           "tableTo": "departments",
           "columnsFrom": [
             "department_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "employees_shift_id_shifts_id_fk": {
+          "name": "employees_shift_id_shifts_id_fk",
+          "tableFrom": "employees",
+          "tableTo": "shifts",
+          "columnsFrom": [
+            "shift_id"
           ],
           "columnsTo": [
             "id"
@@ -478,8 +368,7 @@
         },
         "leave_type": {
           "name": "leave_type",
-          "type": "leave_type",
-          "typeSchema": "public",
+          "type": "varchar(15)",
           "primaryKey": false,
           "notNull": true
         },
@@ -509,8 +398,7 @@
         },
         "status": {
           "name": "status",
-          "type": "approval_status",
-          "typeSchema": "public",
+          "type": "varchar(15)",
           "primaryKey": false,
           "notNull": true,
           "default": "'pending'"
@@ -637,8 +525,7 @@
         },
         "status": {
           "name": "status",
-          "type": "approval_status",
-          "typeSchema": "public",
+          "type": "varchar(15)",
           "primaryKey": false,
           "notNull": true,
           "default": "'pending'"
@@ -788,117 +675,9 @@
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
-    },
-    "public.users": {
-      "name": "users",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "users_email_unique": {
-          "name": "users_email_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
     }
   },
-  "enums": {
-    "public.approval_status": {
-      "name": "approval_status",
-      "schema": "public",
-      "values": [
-        "pending",
-        "approved",
-        "rejected"
-      ]
-    },
-    "public.attendance_status": {
-      "name": "attendance_status",
-      "schema": "public",
-      "values": [
-        "present",
-        "absent",
-        "late",
-        "half_day",
-        "on_leave"
-      ]
-    },
-    "public.day_of_week": {
-      "name": "day_of_week",
-      "schema": "public",
-      "values": [
-        "monday",
-        "tuesday",
-        "wednesday",
-        "thursday",
-        "friday",
-        "saturday",
-        "sunday"
-      ]
-    },
-    "public.employee_status": {
-      "name": "employee_status",
-      "schema": "public",
-      "values": [
-        "active",
-        "inactive",
-        "on_leave",
-        "terminated"
-      ]
-    },
-    "public.leave_type": {
-      "name": "leave_type",
-      "schema": "public",
-      "values": [
-        "sick",
-        "vacation",
-        "personal",
-        "emergency",
-        "unpaid"
-      ]
-    }
-  },
+  "enums": {},
   "schemas": {},
   "sequences": {},
   "roles": {},

@@ -52,21 +52,6 @@ const data = {
       title: "Employees",
       url: "/dashboard/employees",
       icon: <Users />,
-      // isActive: true,
-      // items: [
-      //   {
-      //     title: "History",
-      //     url: "#",
-      //   },
-      //   {
-      //     title: "Starred",
-      //     url: "#",
-      //   },
-      //   {
-      //     title: "Settings",
-      //     url: "#",
-      //   },
-      // ],
     },
     {
       title: "Settings",

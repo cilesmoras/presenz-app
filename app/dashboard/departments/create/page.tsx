@@ -1,9 +1,11 @@
-import PageHeading from "@/components/page-heading";
+import { DepartmentForm } from "@/components/department-form";
 
 export default function CreateDepartmentsPage() {
   return (
     <>
-      <PageHeading>Create Department</PageHeading>
+      <div className="w-1/2">
+        <DepartmentForm />
+      </div>
     </>
   );
 }

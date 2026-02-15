@@ -74,3 +74,11 @@ export async function getUser() {
 
   return user;
 }
+
+export async function validateAuth() {
+  const supabase = await createClient();
+  const user = await supabase.auth.getUser();
+  if (user.error || !user.data.user) redirect("/login");
+
+  return user.data.user;
+}
